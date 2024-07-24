@@ -1,0 +1,82 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.TextInputBox {
+  margin-top: 20px;
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.FileInputBox {
+  margin-top: 20px;
+}
+
+.ChatInput {
+  width: 30rem;
+}
+
+.MessageDisplay {
+  overflow: auto;
+}
+
+.MessageDisplay::-webkit-scrollbar {
+  width: 10px;
+}
+
+.MessageDisplay::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.MessageDisplay::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.MessageDisplay::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.MessageDisplay {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+textarea::-webkit-scrollbar {
+  width: 1em;
+  border-radius: 5px;
+}
+
+textarea::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 5px;
+}
+
+.frogIcon {
+  height: 5rem;
+  width: 5rem;
+}
+
+.header {
+  gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
