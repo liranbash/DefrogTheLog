@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import mainLogo from'./assets/defog.png';
 import './App.css';
 import {Box, Button, styled, TextField, CircularProgress, Typography} from "@mui/material";
-import messageOutput from "./messageOutput";
+import axios from 'axios';
+import {getOutputMessageApi} from "./Routes";
 
 function App() {
     const VisuallyHiddenInput = styled('input')({
@@ -26,23 +27,35 @@ function App() {
         setChatInput(event.target.value);
     };
 
-    const handleSendClickLive = () => {
-        const newMessage = messageOutput;
-        let i = 0;
+    async function sendMessageToApi(chatInput: string) {
+        try {
+            console.log(getOutputMessageApi)
+            const response = await axios.post(getOutputMessageApi, {chatInput});
+            console.log(response)
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    const handleSendClickLive = async () => {
         setIsLoading(true);
-        const loadIntervalId = setInterval(() => {
-            setIsLoading(false);
-            clearInterval(loadIntervalId);
-            setMessage('');
+        try {
+            const responseMessage = await sendMessageToApi(chatInput);
+            let i = 0;
             const intervalId = setInterval(() => {
-                if (i < newMessage.length) {
-                    setMessage(prevMessage => prevMessage + newMessage[i]);
+                if (i < responseMessage.length) {
+                    setMessage(prevMessage => prevMessage + responseMessage[i]);
                     i++;
                 } else {
+                    setIsLoading(false);
                     clearInterval(intervalId);
                 }
             }, 10);
-        }, 3000);
+        } catch (error) {
+            console.error('Error sending message:', error);
+            setIsLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -87,7 +100,7 @@ function App() {
                     variant="outlined"
                     value={chatInput}
                     onChange={handleChatInputChange}
-                    style={{width: '50rem'}}
+                    style={{width: '64rem'}}
                 />
                 <Button variant="contained" disabled={chatInput === ''} onClick={handleSendClickLive}>Send</Button>
                 {isLoading && <CircularProgress  />}
