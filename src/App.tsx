@@ -100,7 +100,7 @@ function App() {
                     variant="outlined"
                     value={chatInput}
                     onChange={handleChatInputChange}
-                    style={{width: '64rem'}}
+                    style={{width: '60rem'}}
                 />
                 <Button variant="contained" disabled={chatInput === ''} onClick={handleSendClickLive}>Send</Button>
                 {isLoading && <CircularProgress  />}
